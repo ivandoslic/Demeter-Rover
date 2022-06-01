@@ -4,8 +4,6 @@ import cv2
 app = Flask(__name__)
 video1 = cv2.VideoCapture(0)
 video2 = cv2.VideoCapture(1)
-face_cascade = cv2.CascadeClassifier()
-face_cascade.load(cv2.samples.findFile("static/haarcascade_frontalface_alt.xml"))
 
 @app.route('/')
 def index():
