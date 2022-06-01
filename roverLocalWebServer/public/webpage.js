@@ -1,3 +1,5 @@
+var activeCam = 0;
+
 function helloEsp() {
     try {
         fetch('http://192.168.1.18:5000/helloEsp');
@@ -90,9 +92,69 @@ function turretRight() {
     }
 }
 
-function buttonPressed(buttonID) {
+function buttonAPressed(buttonID) {
     try {
-        fetch(('http://192.168.1.18:5000/button' + buttonID)).then(response => {
+        fetch('http://192.168.1.18:5000/buttonA').then(response => {
+            if (!response.ok) {
+                console.error(response.status);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function buttonBPressed(buttonID) {
+    try {
+        fetch('http://192.168.1.18:5000/buttonB').then(response => {
+            if (!response.ok) {
+                console.error(response.status);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function buttonCPressed(buttonID) {
+    try {
+        fetch('http://192.168.1.18:5000/buttonC').then(response => {
+            if (!response.ok) {
+                console.error(response.status);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function buttonDPressed(buttonID) {
+    try {
+        fetch('http://192.168.1.18:5000/buttonD').then(response => {
+            if (!response.ok) {
+                console.error(response.status);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function buttonEPressed(buttonID) {
+    try {
+        fetch('http://192.168.1.18:5000/buttonE').then(response => {
+            if (!response.ok) {
+                console.error(response.status);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function buttonFPressed(buttonID) {
+    try {
+        fetch('http://192.168.1.18:5000/buttonF').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -111,5 +173,16 @@ function buttonReleased() {
         });
     } catch (e) {
         console.error(e);
+    }
+}
+
+function changeCam() {
+    var frame = document.getElementById('streamFrame');
+    if (activeCam === 0) {
+        activeCam = 1;
+        frame.src = 'http://127.0.0.1:5000/video_feed2'
+    } else {
+        activeCam = 0;
+        frame.src = 'http://127.0.0.1:5000/video_feed1'
     }
 }

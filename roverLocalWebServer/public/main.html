@@ -25,20 +25,21 @@
         </div>
 
         <div style="border: 1px solid black; width: fit-content; padding: 10px; text-align: center;">
-            <button onmousedown="buttonPressed('A');" onmouseup="buttonReleased();">A</button>
+            <button onmousedown="buttonAPressed('A');" onmouseup="buttonReleased();">A</button>
             <br />
-            <button onmousedown="buttonPressed('B');" onmouseup="buttonReleased();">B</button>
-            <button onmousedown="buttonPressed('C');" onmouseup="buttonReleased();">C</button>
+            <button onmousedown="buttonBPressed('B');" onmouseup="buttonReleased();">B</button>
+            <button onmousedown="buttonCPressed('C');" onmouseup="buttonReleased();">C</button>
             <br />
-            <button onmousedown="buttonPressed('D');" onmouseup="buttonReleased();">D</button>
-            <button onmousedown="buttonPressed('E');" onmouseup="buttonReleased();">E</button>
-            <button onmousedown="buttonPressed('F');" onmouseup="buttonReleased();">F</button>
+            <button onmousedown="buttonDPressed('D');" onmouseup="buttonReleased();">D</button>
+            <button onmousedown="buttonEPressed('E');" onmouseup="buttonReleased();">E</button>
+            <button onmousedown="buttonFPressed('F');" onmouseup="buttonReleased();">F</button>
         </div>
         <div
             style="border: 1px solid black; width: 640px; height: 480px; display: flex; justify-content: center; align-items: center;">
-            <iframe src="https://thekelleys.org.uk/dnsmasq/doc.html" height="480" width="640"
+            <iframe id="streamFrame" src="http://127.0.0.1:5000/video_feed1" height="480" width="640"
                 title="Iframe Example"></iframe>
         </div>
+        <button onclick="changeCam();">Change camera</button>
     </div>
     <div
         style="border-top: 1px solid black; width: 100%; margin-top: 30px; display: flex; justify-content: center; align-items: center;">
