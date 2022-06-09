@@ -10,12 +10,15 @@
 #define MOTOR_LEFT_IN2 18
 #define MOTOR_LEFT_EN 19
 
-#define BUTTON_A 34
-#define BUTTON_B 35
-#define BUTTON_C 32
-#define BUTTON_D 33
-#define BUTTON_E 25
-#define BUTTON_F 26
+#define BUTTON_A 14
+#define BUTTON_B 27
+#define BUTTON_C 26
+#define BUTTON_D 33 
+#define BUTTON_E 25 
+#define BUTTON_F 32 
+
+#define STEPPER_DISABLE_PIN 23
+#define STEPPER_DIRECTION_PIN 22
 
 int movementMode = 0;
 
@@ -27,11 +30,11 @@ const int resolution = 8;
 int dutyCycle = 200;
 
 // ↓ WiFi ↓
-const char* ssid = "DOSLIC";
-const char* password = "31012104";
+const char* ssid = "RoverAP";
+const char* password = "demeterjesranje";
 
-int activeButton = BUTTON_A;  // Determines which button is currently pressed
-bool isButtonPressed = false;
+int buttonDuration = 150;
+int pwrButtonDuration = 2500;
 
 using namespace websockets;
 
@@ -54,6 +57,11 @@ void setup() {
   pinMode(BUTTON_D, OUTPUT);
   pinMode(BUTTON_E, OUTPUT);
   pinMode(BUTTON_F, OUTPUT);
+
+  pinMode(STEPPER_DISABLE_PIN, OUTPUT);
+  pinMode(STEPPER_DIRECTION_PIN, OUTPUT);
+
+  digitalWrite(STEPPER_DISABLE_PIN, HIGH);
 
   ledcSetup(pwmChannelRight, frequency, resolution);
   ledcSetup(pwmChannelLeft, frequency, resolution);
@@ -87,27 +95,9 @@ void setup() {
   });
 }
 
-void goForward() {
-  ledcWrite(pwmChannelRight, 255);
-  ledcWrite(pwmChannelLeft, 255);
-  digitalWrite(MOTOR_RIGHT_IN1, HIGH);
-  digitalWrite(MOTOR_RIGHT_IN2, LOW);
-  digitalWrite(MOTOR_LEFT_IN1, HIGH);
-  digitalWrite(MOTOR_LEFT_IN2, LOW);
-}
-
-void goBackwards() {
-  ledcWrite(pwmChannelRight, 255);
-  ledcWrite(pwmChannelLeft, 255);
-  digitalWrite(MOTOR_RIGHT_IN1, LOW);
-  digitalWrite(MOTOR_RIGHT_IN2, HIGH);
-  digitalWrite(MOTOR_LEFT_IN1, LOW);
-  digitalWrite(MOTOR_LEFT_IN2, HIGH);
-}
-
 void turnRight() {
   ledcWrite(pwmChannelRight, 100);
-  ledcWrite(pwmChannelLeft, 255);
+  ledcWrite(pwmChannelLeft, 100);
   digitalWrite(MOTOR_RIGHT_IN1, HIGH);
   digitalWrite(MOTOR_RIGHT_IN2, LOW);
   digitalWrite(MOTOR_LEFT_IN1, HIGH);
@@ -115,10 +105,28 @@ void turnRight() {
 }
 
 void turnLeft() {
-  ledcWrite(pwmChannelRight, 255);
+  ledcWrite(pwmChannelRight, 100);
+  ledcWrite(pwmChannelLeft, 100);
+  digitalWrite(MOTOR_RIGHT_IN1, LOW);
+  digitalWrite(MOTOR_RIGHT_IN2, HIGH);
+  digitalWrite(MOTOR_LEFT_IN1, LOW);
+  digitalWrite(MOTOR_LEFT_IN2, HIGH);
+}
+
+void goForward() {
+  ledcWrite(pwmChannelRight, 100);
   ledcWrite(pwmChannelLeft, 100);
   digitalWrite(MOTOR_RIGHT_IN1, HIGH);
   digitalWrite(MOTOR_RIGHT_IN2, LOW);
+  digitalWrite(MOTOR_LEFT_IN1, LOW);
+  digitalWrite(MOTOR_LEFT_IN2, HIGH);
+}
+
+void goBackwards() {
+  ledcWrite(pwmChannelRight, 100);
+  ledcWrite(pwmChannelLeft, 100);
+  digitalWrite(MOTOR_RIGHT_IN1, LOW);
+  digitalWrite(MOTOR_RIGHT_IN2, HIGH);
   digitalWrite(MOTOR_LEFT_IN1, HIGH);
   digitalWrite(MOTOR_LEFT_IN2, LOW);
 }
@@ -128,6 +136,20 @@ void stopMoving() {
   digitalWrite(MOTOR_RIGHT_IN2, LOW);
   digitalWrite(MOTOR_LEFT_IN1, LOW);
   digitalWrite(MOTOR_LEFT_IN2, LOW);
+}
+
+void turretLeft() {
+  digitalWrite(STEPPER_DIRECTION_PIN, LOW);
+  digitalWrite(STEPPER_DISABLE_PIN, LOW);
+}
+
+void turretRight() {
+  digitalWrite(STEPPER_DIRECTION_PIN, HIGH);
+  digitalWrite(STEPPER_DISABLE_PIN, LOW);
+}
+
+void turretStop() {
+  digitalWrite(STEPPER_DISABLE_PIN, HIGH);
 }
 
 void executeInstruction(String instruction) {
@@ -142,37 +164,40 @@ void executeInstruction(String instruction) {
   } else if(instruction == "s") {
       movementMode = 0;
   } else if(instruction == "tl") {
-      Serial.println("Truning turret to the left");
+      turretLeft();
   } else if(instruction == "tr") {
-      Serial.println("Truning turret to the right");
+      turretRight();
+  } else if(instruction == "ts") {
+      turretStop();
+      Serial.println("Stopping turret");
   } else if(instruction == "ba") {
-      activeButton = BUTTON_A;
-      isButtonPressed = true;
-      Serial.println("Button A pressed");
+      digitalWrite(BUTTON_A, HIGH);
+      delay(buttonDuration);
+      digitalWrite(BUTTON_A, LOW);
   } else if(instruction == "bb") {
-      activeButton = BUTTON_B;
-      isButtonPressed = true;
-      Serial.println("Button B pressed");
+      digitalWrite(BUTTON_B, HIGH);
+      delay(buttonDuration);
+      digitalWrite(BUTTON_B, LOW);
   } else if(instruction == "bc") {
-      activeButton = BUTTON_C;
-      isButtonPressed = true;
-      Serial.println("Button C pressed");
+      digitalWrite(BUTTON_C, HIGH);
+      delay(buttonDuration);
+      digitalWrite(BUTTON_C, LOW);
   } else if(instruction == "bd") {
-      activeButton = BUTTON_D;
-      isButtonPressed = true;
-      Serial.println("Button D pressed");
+      digitalWrite(BUTTON_D, HIGH);
+      delay(buttonDuration);
+      digitalWrite(BUTTON_D, LOW);
   } else if(instruction == "be") {
-      activeButton = BUTTON_E;
-      isButtonPressed = true;
-      Serial.println("Button E pressed");
+      digitalWrite(BUTTON_E, HIGH);
+      delay(buttonDuration);
+      digitalWrite(BUTTON_E, LOW);
   } else if(instruction == "bf") {
-      activeButton = BUTTON_F;
-      isButtonPressed = true;
-      Serial.println("Button F pressed");
-  } else if(instruction == "br") {
-      isButtonPressed = false;
-      digitalWrite(activeButton, LOW);
-      Serial.println("Button released");
+      digitalWrite(BUTTON_F, HIGH);
+      delay(buttonDuration);
+      digitalWrite(BUTTON_F, LOW);
+  } else if(instruction == "pwr") {
+      digitalWrite(BUTTON_A, HIGH);
+      delay(pwrButtonDuration);
+      digitalWrite(BUTTON_A, LOW);
   } else {  
     Serial.println(instruction); 
   }
@@ -201,12 +226,6 @@ void loop(){
       break;
     default:
       stopMoving();
-  }
-
-  if(isButtonPressed) {
-    digitalWrite(activeButton, HIGH);
-  } else {
-    digitalWrite(activeButton, LOW);
   }
   
   delay(200);
