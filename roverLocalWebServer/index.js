@@ -53,12 +53,10 @@ app.get('/stop', (req, res) => {
 
 app.get('/turretLeft', (req, res) => {
     esp.send("tl");
-    res.send("Turret left");
 });
 
 app.get('/turretRight', (req, res) => {
     esp.send("tr");
-    res.send("Turret right");
 });
 
 app.get('/buttonA', (req, res) => {
@@ -87,6 +85,16 @@ app.get('/buttonF', (req, res) => {
 
 app.get('/buttonR', (req, res) => {
     esp.send("br");
+});
+
+app.get('/buttonPWR', (req, res) => {
+    esp.send("pwr");
+});
+
+app.get('/turretStop', (req, res) => {
+    setTimeout(() => {
+        esp.send("ts");
+    }, 20);
 });
 
 app.listen(5000, () => console.log('Server started on port 5000!'));

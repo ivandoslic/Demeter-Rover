@@ -20,26 +20,26 @@
             <button onmousedown="goBackwards();" onmouseup="stopMovement();">Back</button>
             <br />
             <br />
-            <button onmousedown="turretLeft();" onmouseup="stopMovement();">Turret left</button>
-            <button onmousedown="turretRight();" onmouseup="stopMovement();">Turret right</button>
+            <button onmousedown="turretLeft();" onmouseup="turretStop();">Turret left</button>
+            <button onmousedown="turretRight();" onmouseup="turretStop();">Turret right</button>
         </div>
 
         <div style="border: 1px solid black; width: fit-content; padding: 10px; text-align: center;">
             <button onmousedown="buttonAPressed('A');" onmouseup="buttonReleased();">A</button>
-            <br />
             <button onmousedown="buttonBPressed('B');" onmouseup="buttonReleased();">B</button>
             <button onmousedown="buttonCPressed('C');" onmouseup="buttonReleased();">C</button>
             <br />
             <button onmousedown="buttonDPressed('D');" onmouseup="buttonReleased();">D</button>
             <button onmousedown="buttonEPressed('E');" onmouseup="buttonReleased();">E</button>
+            <br />
             <button onmousedown="buttonFPressed('F');" onmouseup="buttonReleased();">F</button>
         </div>
+        <button onmousedown="buttonPWR();" onmouseup="buttonReleased();">Power button</button>
         <div
             style="border: 1px solid black; width: 640px; height: 480px; display: flex; justify-content: center; align-items: center;">
-            <iframe id="streamFrame" src="http://127.0.0.1:5000/video_feed1" height="480" width="640"
+            <iframe src="http://www.ss-elektrotehnickaiekonomska-ngradiska.skole.hr/" height="480" width="640"
                 title="Iframe Example"></iframe>
         </div>
-        <button onclick="changeCam();">Change camera</button>
     </div>
     <div
         style="border-top: 1px solid black; width: 100%; margin-top: 30px; display: flex; justify-content: center; align-items: center;">

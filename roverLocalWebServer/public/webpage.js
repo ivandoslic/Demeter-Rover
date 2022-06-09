@@ -1,8 +1,6 @@
-var activeCam = 0;
-
 function helloEsp() {
     try {
-        fetch('http://192.168.1.18:5000/helloEsp');
+        fetch('http://localhost:5000/helloEsp');
     } catch (e) {
         console.error(e);
     }
@@ -10,7 +8,7 @@ function helloEsp() {
 
 function goForward() {
     try {
-        fetch('http://192.168.1.18:5000/forward').then(response => {
+        fetch('http://localhost:5000/forward').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -22,7 +20,7 @@ function goForward() {
 
 function goBackwards() {
     try {
-        fetch('http://192.168.1.18:5000/backwards').then(response => {
+        fetch('http://localhost:5000/backwards').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -34,7 +32,7 @@ function goBackwards() {
 
 function turnLeft() {
     try {
-        fetch('http://192.168.1.18:5000/left').then(response => {
+        fetch('http://localhost:5000/left').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -46,7 +44,7 @@ function turnLeft() {
 
 function turnRight() {
     try {
-        fetch('http://192.168.1.18:5000/right').then(response => {
+        fetch('http://localhost:5000/right').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -58,7 +56,7 @@ function turnRight() {
 
 function stopMovement() {
     try {
-        fetch('http://192.168.1.18:5000/stop').then(response => {
+        fetch('http://localhost:5000/stop').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -70,7 +68,7 @@ function stopMovement() {
 
 function turretLeft() {
     try {
-        fetch('http://192.168.1.18:5000/turretLeft').then(response => {
+        fetch('http://localhost:5000/turretLeft').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -82,7 +80,7 @@ function turretLeft() {
 
 function turretRight() {
     try {
-        fetch('http://192.168.1.18:5000/turretRight').then(response => {
+        fetch('http://localhost:5000/turretRight').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -94,7 +92,7 @@ function turretRight() {
 
 function buttonAPressed(buttonID) {
     try {
-        fetch('http://192.168.1.18:5000/buttonA').then(response => {
+        fetch('http://localhost:5000/buttonA').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -106,7 +104,7 @@ function buttonAPressed(buttonID) {
 
 function buttonBPressed(buttonID) {
     try {
-        fetch('http://192.168.1.18:5000/buttonB').then(response => {
+        fetch('http://localhost:5000/buttonB').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -118,7 +116,7 @@ function buttonBPressed(buttonID) {
 
 function buttonCPressed(buttonID) {
     try {
-        fetch('http://192.168.1.18:5000/buttonC').then(response => {
+        fetch('http://localhost:5000/buttonC').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -130,7 +128,7 @@ function buttonCPressed(buttonID) {
 
 function buttonDPressed(buttonID) {
     try {
-        fetch('http://192.168.1.18:5000/buttonD').then(response => {
+        fetch('http://localhost:5000/buttonD').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -142,7 +140,7 @@ function buttonDPressed(buttonID) {
 
 function buttonEPressed(buttonID) {
     try {
-        fetch('http://192.168.1.18:5000/buttonE').then(response => {
+        fetch('http://localhost:5000/buttonE').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -154,7 +152,19 @@ function buttonEPressed(buttonID) {
 
 function buttonFPressed(buttonID) {
     try {
-        fetch('http://192.168.1.18:5000/buttonF').then(response => {
+        fetch('http://localhost:5000/buttonF').then(response => {
+            if (!response.ok) {
+                console.error(response.status);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+function buttonPWR() {
+    try {
+        fetch('http://localhost:5000/buttonPWR').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -165,8 +175,12 @@ function buttonFPressed(buttonID) {
 }
 
 function buttonReleased() {
+    location.reload();
+}
+
+function turretStop() {
     try {
-        fetch('http://192.168.1.18:5000/buttonR').then(response => {
+        fetch('http://localhost:5000/turretStop').then(response => {
             if (!response.ok) {
                 console.error(response.status);
             }
@@ -174,15 +188,7 @@ function buttonReleased() {
     } catch (e) {
         console.error(e);
     }
-}
-
-function changeCam() {
-    var frame = document.getElementById('streamFrame');
-    if (activeCam === 0) {
-        activeCam = 1;
-        frame.src = 'http://127.0.0.1:5000/video_feed2'
-    } else {
-        activeCam = 0;
-        frame.src = 'http://127.0.0.1:5000/video_feed1'
-    }
+    setTimeout(() => {
+        location.reload();
+    }, 20);
 }
