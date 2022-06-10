@@ -30,4 +30,4 @@ def video_feed2():
     return Response(gen(video2), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, threaded=True)
+    app.run(debug=True, host="YOUR_RASPBERRY_IP_ADDRESS", port=5000, threaded=True)
