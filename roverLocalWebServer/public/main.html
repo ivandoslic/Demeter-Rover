@@ -37,8 +37,9 @@
         <button onmousedown="buttonPWR();" onmouseup="buttonReleased();">Power button</button>
         <div
             style="border: 1px solid black; width: 640px; height: 480px; display: flex; justify-content: center; align-items: center;">
-            <iframe src="http://www.ss-elektrotehnickaiekonomska-ngradiska.skole.hr/" height="480" width="640"
+            <iframe id='streamScreen' src="http://RASPBERRY_IP_ADDRESS:5000/video_feed1/" height="480" width="640"
                 title="Iframe Example"></iframe>
+            <button onclick="changeVideo()">Change video</button>
         </div>
     </div>
     <div

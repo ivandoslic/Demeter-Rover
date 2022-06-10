@@ -1,11 +1,3 @@
-function helloEsp() {
-    try {
-        fetch('http://localhost:5000/helloEsp');
-    } catch (e) {
-        console.error(e);
-    }
-}
-
 function goForward() {
     try {
         fetch('http://localhost:5000/forward').then(response => {
@@ -191,4 +183,16 @@ function turretStop() {
     setTimeout(() => {
         location.reload();
     }, 20);
+}
+
+var video_idx = 1;
+
+function changeVideo() {
+    if (video_idx == 1) {
+        document.getElementById('streamScreen').src = "http://RASPBERRY_IP_ADDRESS:5000/video_feed2/"
+        video_idx = 2;
+    } else {
+        document.getElementById('streamScreen').src = "http://RASPBERRY_IP_ADDRESS:5000/video_feed1/"
+        video_idx = 1;
+    }
 }
