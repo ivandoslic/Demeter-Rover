@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="webpage.js"></script>
+    <title>Document</title>
+</head>
+<body style="width: 100%; display: flex; flex-direction: row;align-items: center; height: 100%;">
+    <div class="left-center">
+        <div class="power-container">
+            <button class="functional-button" onmousedown="buttonPWR();" onmouseup="buttonReleased();">POWER</button>
+        </div>
+        <div class="buttons-container">
+            <div class="three-buttons">
+                <button class="functional-button" onmousedown="buttonAPressed('A');" onmouseup="buttonReleased();">A</button>
+                <button class="functional-button" onmousedown="buttonBPressed('B');" onmouseup="buttonReleased();">B</button>
+                <button class="functional-button" onmousedown="buttonCPressed('C');" onmouseup="buttonReleased();">C</button>
+            </div>
+            <div class="two-buttons">
+                <button class="functional-button" onmousedown="buttonDPressed('D');" onmouseup="buttonReleased();">D</button>
+                <button class="functional-button" onmousedown="buttonEPressed('E');" onmouseup="buttonReleased();">E</button>
+            </div>
+            <div class="one-button">
+                <button class="functional-button" onmousedown="buttonFPressed('F');" onmouseup="buttonReleased();">F</button>
+            </div>
+        </div>
+        <div class="turret-controls-container">
+            <h3
+                style="margin: 0; margin-bottom: 10px; color: rgba(255, 255, 255, 0.171); font-family: ITCAvantGardeStd-Bk, Arial, sans-serif;">
+                Turret controls</h3>
+            <div class="turret-buttons-container">
+                <button class="functional-button" onmousedown="turretLeft();" onmouseup="turretStop();">
+                    <img src="./arrow.png" style="filter: invert(1);" height="30px">
+                </button>
+                <button class="functional-button" onmousedown="turretRight();" onmouseup="turretStop();">
+                    <img src="./arrow.png" style="filter: invert(1); transform: rotate(180deg);" height="30px">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="d-pad-container">
+        <div class="d-pad">
+            <div class="d-pad-up" onmousedown="goForward();" onmouseup="stopMovement();">
+                <img src="./arrow.png" style="filter: invert(1); transform: rotate(90deg);">
+            </div>
+            <div class="d-pad-center">
+                <div class="d-pad-left" onmousedown="turnLeft();" onmouseup="stopMovement();">
+                    <img src="./arrow.png" style="filter: invert(1);">
+                </div>
+                <div class="abort-button" onmousedown="stopMovement();" onmouseup="stopMovement();">STOP</div>
+                <div class="d-pad-right" onmousedown="turnRight();" onmouseup="stopMovement();">
+                    <img src="./arrow.png" style="filter: invert(1); transform: rotate(180deg);">
+                </div>
+            </div>
+            <div class="d-pad-down" onmousedown="goBackwards();" onmouseup="stopMovement();">
+                <img src="./arrow.png" style="filter: invert(1); transform: rotate(270deg);">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

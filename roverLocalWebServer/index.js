@@ -23,7 +23,7 @@ app.ws('/device', ws => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/main.html'));
+    res.sendFile(path.join(__dirname, 'public/newInterface.html'));
 });
 
 app.get('/forward', (req, res) => {

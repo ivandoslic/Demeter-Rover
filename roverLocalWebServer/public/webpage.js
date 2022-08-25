@@ -189,10 +189,10 @@ var video_idx = 1;
 
 function changeVideo() {
     if (video_idx == 1) {
-        document.getElementById('streamScreen').src = "http://RASPBERRY_IP_ADDRESS:5000/video_feed2/"
+        document.getElementById('streamScreen').src = "http://192.168.1.100:5000/video_feed2/"
         video_idx = 2;
     } else {
-        document.getElementById('streamScreen').src = "http://RASPBERRY_IP_ADDRESS:5000/video_feed1/"
+        document.getElementById('streamScreen').src = "http://192.168.1.100:5000/video_feed1/"
         video_idx = 1;
     }
 }
